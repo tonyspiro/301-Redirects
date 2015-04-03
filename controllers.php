@@ -101,7 +101,7 @@ $redirects = new Redirects;
 ========================= */
 
 if(isset($_POST['custom_id']) && isset($_POST['delete_custom'])){
-	$custom_id = $_POST['custom_id'];
+	$custom_id = sanitize_text_field($_POST['custom_id']);
 	$redirects->remove($custom_id);
 	die();
 }
@@ -114,10 +114,10 @@ if(isset($_POST['links_audit_submit']) && !isset($_POST['delete_custom'])){
 
 	foreach($redirect_arr as $key => $redirect_title){
 
-		$title = $redirect_title;
-		$section = $_POST['section'][$key];
-		$new_link = $_POST['new_link'][$key];
-		$old_link = $_POST['old_link'][$key];
+		$title = sanitize_text_field($redirect_title);
+		$section = sanitize_text_field($_POST['section'][$key]);
+		$new_link = esc_url($_POST['new_link'][$key]);
+		$old_link = esc_url($_POST['old_link'][$key]);
 
 		$redirects->edit($title, $section, $new_link, $old_link);
 	}
