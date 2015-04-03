@@ -1,12 +1,17 @@
-301 Redirects
-----------
+=== 301 Redirects ===
+Contributors: tonyspiro
+Tags: links auditor, redirects, redirect, pages, la redirects, bootstrap, htaccess, redirect old site links, redirect new site links, manage redirects
+Tested up to: 3.9
+
 This plugin helps you add 301 Redirects to your Wordpress site.
 
-You can also download this plugin from the [Links Auditor WordPress plugin page](http://wordpress.org/plugins/links-auditor/).
-Use
-----------
+
+== Description ==
 This plugin is perfect for when you are creating a new site for a client and need to manage all of the redirects from the old site to the new one.  
 
 Find the link to the installed 301 Redirects in the Settings tab in the admin menu.
 
 It will set up a new table in your wordpress install called 'ts_redirects' that will store all of your redirect information.
+
+== Screenshots ==
+1. Add your section, title, old links, new links.

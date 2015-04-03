@@ -17,13 +17,10 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
 	padding: 10px;
 }
 
-#adminmenuback, #adminmenuwrap, #adminmenu{
-	height: 100% !important;
-}
 .alert{
 	margin-top: 20px;
 }
 
-#wpfooter{
-	position: relative;
+#adminmenuback{
+	z-index: 1;
 }

@@ -38,14 +38,20 @@ error_reporting(E_ALL);
 
 */
 
-
 include('controllers.php');
+
+function load_301_redirect_assets() {
+	wp_enqueue_style( 'redirect_301_bootstrap_css', plugin_dir_url( __FILE__ ) . 'lib/bootstrap-3.3.4.css', false, '1.0.0' );
+	wp_enqueue_style(  'redirect_301_custom_css', plugin_dir_url( __FILE__ ) . 'style.css', false, '1.0.0' );
+	wp_enqueue_script( 'bootstrap', plugin_dir_url( __FILE__ ) . 'lib/bootstrap-3.3.4.js', array(), '1.0.0', true );
+}
+
+add_action( 'admin_enqueue_scripts', 'load_301_redirect_assets' );
 
 $siteurl = get_bloginfo('siteurl');
 
 function getUrl() {
-  $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
-  $url .= $_SERVER["REQUEST_URI"];
+  $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] :  'https://'. $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
   return $url;
 }
 
@@ -70,9 +76,6 @@ function redirects_301_options() {
 	$redirects = new Redirects;
 
 	?>
-	<link rel="stylesheet" href="<?php echo plugins_url(); ?>/301-redirects/lib/bootstrap-3.1.1.css" />
-	<script src="<?php echo plugins_url(); ?>/301-redirects/lib/bootstrap-3.1.1.js"></script>
-	<link rel="stylesheet" href="<?php echo plugins_url(); ?>/301-redirects/style.css" />
 
 	<div class="col-sm-12">
 		<?php
@@ -86,7 +89,7 @@ function redirects_301_options() {
 		<p>
 			Add your old paths <code>/old-path-from-old-site</code> in the old link field and the new path <code>/new-path-in-new-site</code> in the new link fields. Title and Section are there for your organization and convenience.  
 			301 Redirects works automatically by redirecting users from your old links to your new ones.			
-</p>
+		</p>
 		<form action="" method="post">
 			<input type="hidden" name="links_audit_submit" value="true">
 			<table class="table table-striped table-bordered">
@@ -113,7 +116,7 @@ function redirects_301_options() {
 							<td><input placeholder="Old Link" name="old_link[]" class="form-control" value="<?php echo $fields['old_link']; ?>" /></td>
 							<td>
 								<table class="no-border col-sm-12">
-									<tr><td><input type="text" class="form-control" placeholder="New Link" name="new_link[]" value="<?php echo $fields['new_link']; ?>" /></td><td><a title="remove row" class="remove-custom pull-right" href="#" data-id="<?php echo $custom_id; ?>">x</a></td></tr>
+									<tr><td><input type="text" class="form-control" placeholder="New Link" name="new_link[]" value="<?php echo $fields['new_link']; ?>" /></td><td><a title="remove row" class="remove-custom pull-right close" href="#" data-id="<?php echo $custom_id; ?>">&times;</a></td></tr>
 								</table>
 							</td>
 						</tr>
@@ -133,15 +136,7 @@ function redirects_301_options() {
 	</div><!-- .col-sm-12 -->
 	<script>
 
-		jQuery(window).on('resize', function(){
-
-			setTimeout(function(){ jQuery('body').addClass('sticky-menu'); }, 500);
-
-		});
-
 		jQuery(function(){
-
-			setTimeout(function(){ jQuery('body').addClass('sticky-menu'); }, 500);
 
 			var rowId = 0;
 
@@ -154,7 +149,7 @@ function redirects_301_options() {
 				'<td><input type="text" class="form-control" placeholder="Section" name="section[]" /></td>' + 
 				'<td><input name="old_link[]" class="pull-left form-control" placeholder="Old Link" /></td>' + 
 				'<td><table class="no-border col-sm-12">' + 
-				'<tr><td><input type="text" class="form-control" placeholder="New Link" name="new_link[]" /></td><td><a title="remove row" class="remove-row pull-right" href="#" data-id="' + rowId + '">x</a></td>' +
+				'<tr><td><input type="text" class="form-control" placeholder="New Link" name="new_link[]" /></td><td><a title="remove row" class="remove-row pull-right close" href="#" data-id="' + rowId + '">&times;</a></td>' +
 				'</tr></table></td>' + 
 				'</tr>';
 
