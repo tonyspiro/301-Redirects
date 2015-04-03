@@ -2,7 +2,6 @@
 ----------
 This plugin helps you add 301 Redirects to your Wordpress site.
 
-You can also download this plugin from the [Links Auditor WordPress plugin page](http://wordpress.org/plugins/links-auditor/).
 Use
 ----------
 This plugin is perfect for when you are creating a new site for a client and need to manage all of the redirects from the old site to the new one.  
