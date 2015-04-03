@@ -1,6 +1,6 @@
 === 301 Redirects ===
 Contributors: tonyspiro
-Tags: links auditor, redirects, redirect, pages, la redirects, bootstrap, htaccess, redirect old site links, redirect new site links, manage redirects
+Tags: 301 redirects, redirects, redirect, pages, bootstrap, redirect old site links, redirect new site links, manage redirects
 Tested up to: 3.9
 
 This plugin helps you add 301 Redirects to your Wordpress site.
