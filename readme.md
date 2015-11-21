@@ -1,7 +1,7 @@
 301 Redirects
 ----------
-https://wordpress.org/plugins/301-redirects/<br><br>
-This plugin helps you add 301 Redirects to your Wordpress site.
+This plugin helps you add 301 Redirects to your Wordpress site.<br>
+https://wordpress.org/plugins/301-redirects/
 
 Use
 ----------
