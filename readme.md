@@ -8,4 +8,4 @@ This plugin is perfect for when you are creating a new site from an old one and 
 
 Find the link to the installed 301 Redirects in the Settings tab in the admin menu.
 
-It will set up a new table in your wordpress install called 'ts_redirects' that will store all of your redirect information.
+It will set up a new table in your wordpress install called ```ts_redirects``` that will store all of your redirect information.
