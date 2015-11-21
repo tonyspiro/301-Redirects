@@ -4,12 +4,12 @@
 Plugin Name: 301 Redirects
 Plugin URI: http://tonyspiro.com
 Description: A plugin that helps you add 301 redirects to your site.
-Version: 0.1
+Version: 0.2
 Author: Tony Spiro
 Author URI: http://tonyspiro.com
 License: GPL2
 
-Copyright 2014  Tony Spiro (email: tspiro@tonyspiro.com)
+Copyright 2015  Tony Spiro (email: tspiro@tonyspiro.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -40,10 +40,14 @@ error_reporting(E_ALL);
 
 include('controllers.php');
 
-function load_301_redirect_assets() {
+function load_301_redirect_assets($adminpage)
+{
+	if ($adminpage == 'settings_page_301-redirects')
+	{
 	wp_enqueue_style( 'redirect_301_bootstrap_css', plugin_dir_url( __FILE__ ) . 'lib/bootstrap-3.3.4.css', false, '1.0.0' );
 	wp_enqueue_style(  'redirect_301_custom_css', plugin_dir_url( __FILE__ ) . 'style.css', false, '1.0.0' );
 	wp_enqueue_script( 'bootstrap', plugin_dir_url( __FILE__ ) . 'lib/bootstrap-3.3.4.js', array(), '1.0.0', true );
+	}
 }
 
 add_action( 'admin_enqueue_scripts', 'load_301_redirect_assets' );
@@ -57,11 +61,11 @@ function getUrl() {
 
 $actual_link = getUrl();
 
-$all_redirects = $redirects->getAll();
+$all_redirects = $GLOBALS['redirectsplugins']->getAll();
 
 if($all_redirects){
 	foreach($all_redirects as $redirect_id){
-		$la_redirect = $redirects->getFields($redirect_id);
+		$la_redirect = $GLOBALS['redirectsplugins']->getFields($redirect_id);
 		$la_old_link = str_replace($siteurl, "", $la_redirect['old_link']);
 		$la_new_link = str_replace($siteurl, "", $la_redirect['new_link']);
 		if($actual_link == $siteurl . $la_old_link){
@@ -75,11 +79,43 @@ function redirects_301_options() {
 
 	$redirects = new Redirects;
 
+	/* Processes ========================= */
+
+	$savedsuccesfully = false;
+	if (isset($_POST['custom_id']) && isset($_POST['delete_custom']))
+	{
+		$custom_id = sanitize_text_field($_POST['custom_id']);
+		$redirects->remove($custom_id);
+		die();
+	}
+
+	if (isset($_POST['links_audit_submit']) && !isset($_POST['delete_custom']))
+	{
+
+		$redirects->delete();
+
+		$redirect_arr = $_POST['title'];
+
+		foreach($redirect_arr as $key => $redirect_title){
+
+			$title = sanitize_text_field($redirect_title);
+			$section = sanitize_text_field($_POST['section'][$key]);
+			$new_link = esc_url($_POST['new_link'][$key]);
+			$old_link = esc_url($_POST['old_link'][$key]);
+
+			$redirects->edit($title, $section, $new_link, $old_link);
+		}
+
+		$savedsuccesfully = true;
+	}
+
+
 	?>
 
 	<div class="col-sm-12">
 		<?php
-		if($_GET['page']=="301-redirects" && isset($_GET['message'])){
+		if ($savedsuccesfully)
+		{
 			?>
 			<div class="alert alert-success">Redirects saved.<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>
 			<?php
