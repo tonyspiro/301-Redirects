@@ -3,7 +3,7 @@
 This plugin helps you easily add 301 Redirects to your Wordpress site.<br>
 https://wordpress.org/plugins/301-redirects/
 
-Use
+Usage
 ----------
 This plugin is perfect for when you are creating a new site from an old one and need to manage all of the redirects from the old site to the new one.  
 
