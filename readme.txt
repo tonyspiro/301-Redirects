@@ -1,13 +1,13 @@
 === 301 Redirects ===
 Contributors: tonyspiro
 Tags: 301 redirects, redirects, redirect, pages, bootstrap, redirect old site links, redirect new site links, manage redirects
-Tested up to: 3.9
+Tested up to: 4.3.1
 
 This plugin helps you add 301 Redirects to your Wordpress site.
 
 
 == Description ==
-This plugin is perfect for when you are creating a new site for a client and need to manage all of the redirects from the old site to the new one.  
+This plugin is perfect for when you are creating a new site from an old site and need to manage all of the redirects from the old site to the new one.  
 
 Find the link to the installed 301 Redirects in the Settings tab in the admin menu.
 
