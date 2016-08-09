@@ -1,7 +1,7 @@
 === 301 Redirects ===
 Contributors: tonyspiro
 Tags: 301 redirects, redirects, redirect, pages, bootstrap, redirect old site links, redirect new site links, manage redirects
-Tested up to: 4.3.1
+Tested up to: 4.5.3
 
 This plugin helps you add 301 Redirects to your Wordpress site.
 

@@ -69,7 +69,7 @@ if($all_redirects){
 		$la_old_link = str_replace($siteurl, "", $la_redirect['old_link']);
 		$la_new_link = str_replace($siteurl, "", $la_redirect['new_link']);
 		if($actual_link == $siteurl . $la_old_link){
-			header("Location: " . $siteurl . $la_new_link);
+			header("Location: " . $siteurl . $la_new_link, true, 301);
 			die();
 		}
 	}
